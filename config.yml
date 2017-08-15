@@ -1,0 +1,23 @@
+# The name of the site will be used to reference theme files.
+NAME: "ict-procurement-taskforce"
+
+# Your project's server will run on localhost:xxxx at this port
+PORT: 3000
+
+# Folder to clean up before running scripts.
+CLEAN:
+  - "dist"
+
+# Autoprefixer will make sure your CSS works with these browsers
+COMPATIBILITY:
+  - "last 2 versions"
+  - "ie >= 8"
+
+# Gulp will reference these paths when it copies files
+PATHS:
+  js: "/src/scripts/"
+  sass: "/src/sass/"
+  images: "/src/assets/images/"
+  html: "/src/html/"
+  fonts: "/src/assets/fonts/"
+  documents: "/src/documents/"
