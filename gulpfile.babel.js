@@ -7,10 +7,14 @@ import gulp     from 'gulp';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
 import del      from 'del';
+import panini   from 'panini';
 
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
+
+// Check for --production flag
+const PRODUCTION = !!(yargs.argv.production);
 
 // Load settings from settings.yml
 const { NAME, PORT, CLEAN, COMPATIBILITY, PATHS } = loadConfig();
@@ -20,8 +24,13 @@ function loadConfig() {
   return yaml.load(ymlFile);
 }
 
-// Build the site, run the server, and watch for file changes
-gulp.task('default', gulp.series(clean, copyObjects, html, js, sass, [server, watch]));
+// Build the 'dist' folder.
+gulp.task('build',
+  gulp.series(clean, gulp.parallel(pages, sass, javascript, copy)));
+
+// Build the site, run the server and watch for changes.
+gulp.task('default',
+  gulp.series('build', server, watch));
 
 // Clean out the folders specified by the CLEAN constant.
 
@@ -31,13 +40,17 @@ function clean() {
   );
 }
 
-// Move scripts from source into destination.
-// If anything else needs to happen to the JS, do it here.
-
-function js() {
-  return gulp.src('.' + PATHS.js + '**/*.js')
-    .pipe(gulp.dest('./dist/js'))
-    .pipe(browser.reload({ stream: true }));
+// Copy page templates into finished HTML files.
+function pages() {
+  return gulp.src('src/pages/**/*.{html,hbs,handlebars}')
+    .pipe(panini({
+      root: './src/pages/',
+      layouts: './src/layouts/',
+      partials: './src/partials/',
+      helpers: './src/helpers/',
+      data: './src/data',
+    }))
+    .pipe(gulp.dest('./dist/'))
 }
 
 // Compile Sass into CSS
@@ -59,25 +72,35 @@ function sass() {
     .pipe(browser.reload({ stream: true }));
 }
 
-function jsWatch(done) {
-  browser.reload();
-  done();
+// Combine JavaScript into one file
+// In production, the file is minified
+function javascript() {
+  return gulp.src('./src/scripts/**/*.js')
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('app.js'))
+    .pipe($.if(PRODUCTION, $.uglify()
+      .on('error', e => { console.log(e); })
+    ))
+    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    .pipe(gulp.dest('./dist/js/'));
 }
 
-function htmlWatch(done) {
-  browser.reload();
-  done();
-}
-
-function html() {
-  return gulp.src('.' + PATHS.html + '**/*.html')
-    .pipe(gulp.dest('./dist/'))
-    .pipe(browser.reload({ stream: true }));
-}
-
-function copyObjects() {
+// Copy static assets etc. over to 'dist'.
+function copy() {
   return gulp.src('./src/assets/**/*.*')
     .pipe(gulp.dest('./dist/assets/'));
+}
+
+// Load updated HTML templates and partials into Panini
+function resetPages(done) {
+  panini.refresh();
+  done();
+}
+
+// Reload the browser with BrowserSync
+function reload(done) {
+  browser.reload();
+  done();
 }
 
 // Start a server with BrowserSync to preview the site in
@@ -92,7 +115,9 @@ function server(done) {
 
 // Watch for changes to Sass, HTML and .js.
 function watch() {
+  gulp.watch('./src/assets/**/*.*', copy);
   gulp.watch('./src/sass/**/*.scss', sass);
-  gulp.watch('./src/html/**/*.html', gulp.series(html, htmlWatch));
-  gulp.watch('./src/scripts/**/*.js', gulp.series(js, jsWatch));
+  gulp.watch('./src/**/*.html')
+    .on('all', gulp.series(resetPages, pages, browser.reload));
+  gulp.watch('./src/scripts/**/*.js', gulp.series(javascript, browser.reload));
 }
