@@ -8,6 +8,8 @@ import yaml     from 'js-yaml';
 import fs       from 'fs';
 import del      from 'del';
 import panini   from 'panini';
+import rename   from 'gulp-rename';
+import vinylPaths from 'vinyl-paths';
 
 
 // Load all Gulp plugins into one variable
@@ -26,7 +28,7 @@ function loadConfig() {
 
 // Build the 'dist' folder.
 gulp.task('build',
-  gulp.series(clean, gulp.parallel(pages, sass, javascript, copy)));
+  gulp.series(clean, copy, renameFiles, gulp.parallel(pages, sass, javascript)));
 
 // Build the site, run the server and watch for changes.
 gulp.task('default',
@@ -38,6 +40,21 @@ function clean() {
   return del(
     CLEAN
   );
+}
+
+// Copy static assets etc. over to 'dist'.
+function copy() {
+  return gulp.src('./src/assets/{documents,images}/*.*')
+    .pipe(gulp.dest('./dist/assets/'));
+}
+
+function renameFiles() {
+  return gulp.src('src/assets/submissions/**/*.*')
+    .pipe(rename(function (path) {
+      path.basename = path.basename.replace(/\./g, '').replace(/\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\""|\;|\:|\s/g, '-').replace(/\-{2,}/g, '-').replace(/\-$/g, '').toLowerCase();
+    }))
+    .pipe(vinylPaths(del))
+    .pipe(gulp.dest('./dist/assets/submissions/'));
 }
 
 // Copy page templates into finished HTML files.
@@ -83,12 +100,6 @@ function javascript() {
     ))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
     .pipe(gulp.dest('./dist/js/'));
-}
-
-// Copy static assets etc. over to 'dist'.
-function copy() {
-  return gulp.src('./src/assets/**/*.*')
-    .pipe(gulp.dest('./dist/assets/'));
 }
 
 // Load updated HTML templates and partials into Panini
