@@ -1,0 +1,13 @@
+// Accessibility classes.
+
+// Show content for screen readers only.
+// Taken from http://webaim.org/techniques/css/invisiblecontent/.
+
+.show-for-sr {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
