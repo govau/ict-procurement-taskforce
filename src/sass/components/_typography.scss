@@ -1,0 +1,18 @@
+// Extra typography styles.
+
+.dpmc-section-07 {
+  .mdl-list {
+    .mdl-list__item {
+      font-family: "Montserrat", sans-serif;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        color: white;
+      }
+    }
+  }
+}
