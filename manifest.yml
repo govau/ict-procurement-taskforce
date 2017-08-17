@@ -1,0 +1,5 @@
+---
+applications:
+- name: ict-procurement
+  memory: 64M
+  path: dist

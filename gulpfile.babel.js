@@ -10,6 +10,7 @@ import del      from 'del';
 import panini   from 'panini';
 import rename   from 'gulp-rename';
 import vinylPaths from 'vinyl-paths';
+import file     from 'gulp-file';
 
 
 // Load all Gulp plugins into one variable
@@ -28,7 +29,7 @@ function loadConfig() {
 
 // Build the 'dist' folder.
 gulp.task('build',
-  gulp.series(clean, copy, renameFiles, gulp.parallel(pages, sass, javascript)));
+  gulp.series(clean, copy, staticFile, cfIgnore, /*renameFiles,*/ gulp.parallel(pages, sass, javascript)));
 
 // Build the site, run the server and watch for changes.
 gulp.task('default',
@@ -46,6 +47,16 @@ function clean() {
 function copy() {
   return gulp.src('./src/assets/{documents,images}/*.*')
     .pipe(gulp.dest('./dist/assets/'));
+}
+
+function staticFile() {
+  return file('Staticfile', '', {src: true})
+    .pipe(gulp.dest('./dist/'));
+}
+
+function cfIgnore() {
+  return file('.cfignore', 'node_modules \nsrc \npackage.json \npackage-lock.json\nconfig.yml \ngulpfile.babel.js \nREADME.md \ndist/assets/submissions \nassets/submissions \ndist/submission.html \nsubmission.html', {src: true})
+    .pipe(gulp.dest('./dist/'));
 }
 
 function renameFiles() {
