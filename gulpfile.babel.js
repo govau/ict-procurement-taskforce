@@ -27,16 +27,17 @@ function loadConfig() {
   return yaml.load(ymlFile);
 }
 
-// Build the 'dist' folder.
+// Build the 'dist' folder. The renameFiles function is skipped for now to avoid
+// accidentally publishing the submissions.
+
 gulp.task('build',
-  gulp.series(clean, copy, staticFile, cfIgnore, /*renameFiles,*/ gulp.parallel(pages, sass, javascript)));
+  gulp.series(clean, copy, staticFile, cfIgnore, renameFiles, gulp.parallel(pages, sass, javascript)));
 
 // Build the site, run the server and watch for changes.
 gulp.task('default',
   gulp.series('build', server, watch));
 
 // Clean out the folders specified by the CLEAN constant.
-
 function clean() {
   return del(
     CLEAN
@@ -49,16 +50,21 @@ function copy() {
     .pipe(gulp.dest('./dist/assets/'));
 }
 
+// Create an empty Staticfile for Cloud Foundry.
 function staticFile() {
   return file('Staticfile', '', {src: true})
     .pipe(gulp.dest('./dist/'));
 }
 
+
+// Build the .cfignore file for dist. It is _really_ hard to get Gulp to copy
+// dot files.
 function cfIgnore() {
   return file('.cfignore', 'node_modules \nsrc \npackage.json \npackage-lock.json\nconfig.yml \ngulpfile.babel.js \nREADME.md \ndist/assets/submissions \nassets/submissions \ndist/submission.html \nsubmission.html', {src: true})
     .pipe(gulp.dest('./dist/'));
 }
 
+// Rename and copy the files in the /submissions folder.
 function renameFiles() {
   return gulp.src('src/assets/submissions/**/*.*')
     .pipe(rename(function (path) {
