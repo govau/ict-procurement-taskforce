@@ -1,56 +1,56 @@
 
 /* ===== Print Styles ===== */
 
-body { 
+body {
     margin:0;
-	background: white; 
-	font-size: 12pt; 
+	background: white;
+	font-size: 12pt;
 }
-	
-#menu { 
-	display: none; 
+
+#menu {
+	display: none;
 }
-	
-#main-content, 
+
+#main-content,
 #content,
-.mdl-grid { 
-	width: 100%; 
-	margin: 0 1%; 
-	padding: 0; 
-	border: 0; 
-	float: none !important; 
-	color: black; 
-	background: transparent none; 
+.mdl-grid {
+	width: 100%;
+	margin: 0 1%;
+	padding: 0;
+	border: 0;
+	float: none !important;
+	color: black;
+	background: transparent none;
 }
-	
-div#content { 
-	margin-left: 10%; 
-	padding-top: 1em; 
-	border-top: 1px solid #930; 
+
+div#content {
+	margin-left: 10%;
+	padding-top: 1em;
+	border-top: 1px solid #930;
 }
-	
-div#mast { 
-	margin-bottom: -8px; 
+
+div#mast {
+	margin-bottom: -8px;
 }
-	
-div#mast img { 
-	vertical-align: bottom; 
+
+div#mast img {
+	vertical-align: bottom;
 }
-	
-a:link, 
-a:visited { 
-	color: #520; 
-	background: transparent; 
-	font-weight: bold; 
-	text-decoration: underline; 
+
+a:link,
+a:visited {
+	color: #520;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
 }
-	
-#content a:link:after, 
-#content a:visited:after { 
-	content: " (" attr(href) ") "; 
-	font-size: 90%; 
+
+#content a:link:after,
+#content a:visited:after {
+	content: " (" attr(href) ") ";
+	font-size: 90%;
 }
-	
-#content a[href^="/"]:after { 
-	content: " (http://www.dpmc.gov.au" attr(href) ") "; 
+
+#content a[href^="/"]:after {
+	content: " (https://www.dpmc.gov.au" attr(href) ") ";
 }
