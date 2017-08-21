@@ -1,0 +1,12 @@
+.mdl-button {
+  background-color: white;
+  &:hover {
+    background-color: rgba(158,158,158,1.0);
+  }
+  &.goToTop {
+    &:hover {
+      opacity: 1.0;
+      background-color: white;
+    }
+  }
+}
