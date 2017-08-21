@@ -27,7 +27,6 @@ header {
 
 @media (max-width: 1100px) {
   header {
-    outline: 1px solid red;
     .dpmc-home-image,
     .dpmc-logo-image {
       margin-left: 0;
@@ -43,7 +42,6 @@ header {
 
 @media (max-width: 900px) {
   header {
-    outline: 1px solid red;
     .dpmc-navigation {
       display: none;
       visibility: hidden;
