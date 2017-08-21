@@ -20,6 +20,7 @@
 @import "components/button";
 @import "components/social-media-links";
 @import "components/header";
+@import "components/footer";
 
 html,
 body {
@@ -144,37 +145,6 @@ a.banner-crest-link {display: inline-block;margin: 0 20px;}
 	color: #fff;
 	font-size: 16px;
 	font-weight: 200;
-}
-
-.dpmc-navigation-container {
-	-webkit-order: 1;
-	-ms-flex-order: 1;
-	order: 1;
-	transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dpmc-navigation {
-	direction: ltr;
-	width: 75%;
-}
-
-.dpmc-search-box.is-focused + .dpmc-navigation-container {
-	opacity: 0;
-	width: 100px;
-}
-
-.dpmc-navigation .mdl-navigation__link {
-	display: inline-block;
-	padding: 0 18px;
-	height: 60px;
-	line-height: 68px;
-	background-color: transparent !important;
-	border-bottom: 4px solid transparent;
-}
-
-.dpmc-navigation .mdl-navigation__link.isActive,
-.dpmc-navigation .mdl-navigation__link:hover {
-	border-bottom: 4px solid #007279;
 }
 
 .dpmc-search-box {
@@ -865,10 +835,6 @@ input[type="submit"]:hover {
 									min-height: 150px !important;
 									width: auto;
 									background-color: transparent;
-								}
-
-								.dpmc-navigation-container {
-									display: none;
 								}
 
 								a.banner-home-link {display: none !important;}
