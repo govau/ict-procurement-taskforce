@@ -1,4 +1,11 @@
 footer.mdl-mini-footer {
+  a {
+    color: white;
+    &:hover {
+      text-decoration: underline;
+      color: darken(white, 20%);
+    }
+  }
   justify-content: center;
   h3 {
     flex: 0 0 100%;

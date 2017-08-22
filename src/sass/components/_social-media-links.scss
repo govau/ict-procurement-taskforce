@@ -1,20 +1,16 @@
 .social-media-links {
   a {
-    &:hover {
-      text-decoration: underline;
-      color: white;
-    }
     &.twitter:before {
       background-image: url('https://www.dta.gov.au/images/icons/twitter.svg');
     }
-    &.youtube:before {
-      background-image: url('https://www.dta.gov.au/images/icons/youtube.svg');
+    &.facebook:before {
+      background-image: url('https://www.dta.gov.au/images/icons/facebook.svg');
     }
     &.linkedin:before {
       background-image: url('https://www.dta.gov.au/images/icons/linkedin.svg');
     }
     &:hover:before {
-      filter: invert(100%) hue-rotate(200deg);
+      filter: invert(100%);
     }
     &:before {
       background-position: center center;

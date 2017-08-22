@@ -66,7 +66,7 @@ function staticFile() {
 // Build the .cfignore file for dist. It is _really_ hard to get Gulp to copy
 // dot files.
 function cfIgnore() {
-  return file('.cfignore', 'node_modules \nsrc \npackage.json \npackage-lock.json\nconfig.yml \ngulpfile.babel.js \nREADME.md \ndist/assets/submissions \nassets/submissions \ndist/submission.html \nsubmission.html', {src: true})
+  return file('.cfignore', 'node_modules \nsrc \npackage.json \npackage-lock.json\nconfig.yml \ngulpfile.babel.js \nREADME.md', {src: true})
     .pipe(gulp.dest('./dist/'));
 }
 
