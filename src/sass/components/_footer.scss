@@ -5,6 +5,9 @@ footer.mdl-mini-footer {
       text-decoration: underline;
       color: darken(white, 20%);
     }
+    &.goToTop {
+      color: #007279;
+    }
   }
   justify-content: center;
   h3 {

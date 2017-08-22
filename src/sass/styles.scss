@@ -21,6 +21,7 @@
 @import "components/social-media-links";
 @import "components/header";
 @import "components/footer";
+@import "components/dpmc-section-01";
 
 html,
 body {
@@ -198,19 +199,6 @@ a.banner-crest-link {display: inline-block;margin: 0 20px;}
 .dpmc-drawer .dpmc-logo-image {
 	position: absolute;
 	bottom: 16px;
-}
-
-.dpmc-section-01 {
-	position: relative;
-	height: 85%;
-	min-height: 500px;
-	width: auto;
-	background-color: transparent;
-}
-
-.dpmc-section-01.narrow {
-	height: 25%;
-	min-height: 270px;
 }
 
 .logo-font {

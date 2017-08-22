@@ -1,0 +1,10 @@
+.dpmc-section-01 {
+	position: relative;
+	min-height: 500px;
+	width: auto;
+	background-color: transparent;
+  &.narrow {
+  	height: 25%;
+  	min-height: 270px;
+  }
+}
