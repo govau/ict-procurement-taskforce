@@ -1,3 +1,4 @@
 dist
-src/assets/submissions
 Staticfile.auth
+*.pdf
+*.docx
