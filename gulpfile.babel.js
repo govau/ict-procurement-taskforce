@@ -31,7 +31,7 @@ function loadConfig() {
 // accidentally publishing the submissions.
 
 gulp.task('build',
-  gulp.series(clean, copy, copyAuth, staticFile, cfIgnore, renameFiles, gulp.parallel(pages, sass, javascript)));
+  gulp.series(clean, copy, staticFile, cfIgnore, renameFiles, gulp.parallel(pages, sass, javascript)));
 
 // Build the site, run the server and watch for changes.
 gulp.task('default',
@@ -42,12 +42,6 @@ function clean() {
   return del(
     CLEAN
   );
-}
-
-// Copy over the Staticfile.auth file.
-function copyAuth() {
-  return gulp.src('./src/Staticfile.auth')
-    .pipe(gulp.dest('./dist/'));
 }
 
 // Copy static assets etc. over to 'dist'.
