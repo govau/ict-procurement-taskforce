@@ -5,3 +5,7 @@ instances: 2
 path: ./dist
 applications:
 - name: ict-procurement
+
+routes:
+- route: ict-procurement.digital.gov.au
+- route: ict-procurement.apps.b.cld.gov.au
