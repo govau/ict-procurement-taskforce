@@ -15,3 +15,8 @@ This is a HTML version of the ICT Procurement Taskforce website. The site has be
   4. Begin watching changes to SCSS, HTML and JS files. Changes to SCSS files will be injected into the local site.
   5. Minify the JavaScript.
   6. Flatten the HTML using [Panini](https://github.com/zurb/panini).
+
+## Deploying to cloud.gov.au (cloud foundry)
+
+1. deploy to staging with `cf push -f manifest.yml`
+2. deploy to prod with `cf push -f manifest-prod.yml`
