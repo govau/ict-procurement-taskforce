@@ -1,4 +1,9 @@
 # ICT Procurement Taskforce "Microsite"
+
+## Deprecated
+
+The ICT Procurement Taskforce microsite has been deprecated. For all information on ICT Procurement please visit (the DTA website)[https://beta.dta.gov.au/help-and-advice/ict-procurement]
+
 ## What is this?
 This is a HTML version of the ICT Procurement Taskforce website. The site has been migrated from the Department of Prime Minister and Cabinet to the Digital Transformation Agency. Other than the removal of the form, some minor changes the content is the same.
 
